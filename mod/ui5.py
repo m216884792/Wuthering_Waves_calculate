@@ -1,0 +1,60 @@
+import customtkinter as ctk
+from .groceries import exception_clear
+from configparser import ConfigParser
+import os
+
+path=os.getcwd()
+
+class Ui5(ctk.CTk):
+        def __init__(self,app):
+            super().__init__()
+            self.geometry(f"300x820")
+            self.attributes('-topmost', 'true')
+            self.title(f"其餘設定")
+            ctk.set_appearance_mode("System")
+            ctk.set_default_color_theme("blue")
+            self.topattdict={}
+            self.valuesdict={}
+            self.app=app
+            self.valueslist=['怪物抗性','屬性加成','攻擊傷害%','暴擊%','暴傷%','共鳴技能加成%','共鳴解放加成%','普通攻擊傷害%','重擊傷害%']
+            self.op()
+
+
+        def op(self):
+            config = ConfigParser()
+            config.optionxform = str
+            config.read(f'{path}/calculate/exception.ini',encoding="utf-8")
+
+            for i in self.valueslist:
+                label = ctk.CTkLabel(self, text=f'{i}',font=("Arial", 16))
+                label.pack()
+
+                self.valuesdict[f'{i}']=ctk.CTkEntry(self,width=20*4)
+                self.valuesdict[f'{i}'].insert(0, f"{config['var'][f'{i}']}")
+                self.valuesdict[f'{i}'].pack()
+
+                _ = ctk.CTkLabel(self,text='',font=("Arial", 10))
+                _.pack(pady=0)
+
+
+            step1_label = ctk.CTkButton( self,text=f"確定",command=lambda:self.check_ok(config),font=("Arial", 16))
+            step1_label.pack(pady=10)
+
+
+        def check_ok(self,config):
+
+            exception_clear()
+
+            for loc,i in enumerate(self.valuesdict):
+
+                config.set('var',f'{self.valueslist[loc]}',f'{self.valuesdict[self.valueslist[loc]].get()}')
+
+            with open(f'{path}/calculate/exception.ini', 'w',encoding="utf-8") as configfile:
+                config.write(configfile)
+            self.app.show()
+            self.destroy()
+
+
+        def loop(self):
+            self.mainloop()
+

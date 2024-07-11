@@ -93,7 +93,7 @@ class Ui(ctk.CTk):
         label.place(x=320,y=20)
 
         label2 = ctk.CTkLabel(self, textvariable=self.allatk2,font=("Arial", 16),justify=ctk.LEFT)
-        label2.place(x=500,y=20)
+        label2.place(x=500,y=56)
 
     def loop(self,app):
         self.app=app
@@ -146,6 +146,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-#python -m nuitka --standalone --show-memory --windows-disable-console --show-progress --mingw64 --output-dir=E:/nuitkaoutput main.py --windows-uac-admin --plugin-enable=upx --upx-binary=D:\vscpy\bdo\output\upx\upx.exe --remove-output --follow-imports --plugin-enable=tk-inter
-

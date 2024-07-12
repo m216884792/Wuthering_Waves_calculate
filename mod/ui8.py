@@ -1,3 +1,4 @@
+# coding=utf-8
 import customtkinter as ctk
 from .groceries import rini
 import os
@@ -35,10 +36,15 @@ class Ui8(ctk.CTk):
             rskillpercent=0  #r技%
             npercent=0  #普通攻擊%
             attri=0 #屬性加成%
+            hp=0
+            hppercent=0
+            defense=0
+            defensepercent=0
+            efficiency=0
 
             devstatedict={'攻擊傷害%':percentatk,'攻擊點傷':addatk,'暴擊%':chit,'暴傷%':cpercent,
             '共鳴技能加成%':eskillpercent,'共鳴解放加成%':rskillpercent,
-            '重擊傷害%':wpercent,'普通攻擊傷害%':npercent}
+            '重擊傷害%':wpercent,'普通攻擊傷害%':npercent,'生命':hp,'生命%':hppercent,'防禦':defense,'防禦%':defensepercent,'共鳴效率':efficiency}
 
             arms=rini(f'{path}/calculate/arms.ini')#武器
 

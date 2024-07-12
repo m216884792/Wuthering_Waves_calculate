@@ -1,3 +1,4 @@
+# coding=utf-8
 import customtkinter as ctk
 from .groceries import dev_clear,rini
 import os
@@ -14,7 +15,7 @@ class Ui3(ctk.CTk):
             ctk.set_appearance_mode("System")
             ctk.set_default_color_theme("blue")
             self.app=app
-            self.valueslist=['暴擊%','暴傷%','共鳴技能加成%','共鳴解放加成%','攻擊傷害%','攻擊點傷','重擊傷害%']
+            self.valueslist=['暴擊%','暴傷%','攻擊傷害%','攻擊點傷','共鳴技能加成%','共鳴解放加成%','普通攻擊傷害%','重擊傷害%','生命','生命%','防禦','防禦%','共鳴效率']
             self.valuesdict={}
 
             self.op(f"生骸{var}",var)
@@ -56,7 +57,7 @@ class Ui3(ctk.CTk):
             config.set('var','fixed',f'{self.topatt.get()}%')
 
             for loc,i in enumerate(self.valuesdict):
-                print(i.get(),'/',self.valuesdict[i].get())
+                # print(i.get(),'/',self.valuesdict[i].get())
                 if '%' in i.get():
                     i.set(f'{i.get()}%')
 

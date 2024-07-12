@@ -1,3 +1,4 @@
+# coding=utf-8
 import customtkinter as ctk
 from .groceries import skill_clear,rini
 import os

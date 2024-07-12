@@ -1,3 +1,4 @@
+# coding=utf-8
 import customtkinter as ctk
 from .groceries import rank_clear,rini
 import os

@@ -60,7 +60,7 @@ def allcalculate():
 
     for i in ['全傷害加深%','屬性傷害加深%','共鳴技能加深%','共鳴解放加深%','普通攻擊加深%','重擊加深%']:
         if float(exception2['var'][i])>0:
-            exception2.set('var',i,f"{1+float(exception2['var'][i])/100}")
+            exception2.set('var',i,f"{float(exception2['var'][i])/100}")
         else:
             exception2.set('var',i,"0")
 

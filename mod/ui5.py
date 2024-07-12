@@ -1,7 +1,7 @@
 import customtkinter as ctk
-from .groceries import exception_clear
-from configparser import ConfigParser
+from .groceries import exception_clear,rini
 import os
+
 
 path=os.getcwd()
 
@@ -9,21 +9,19 @@ class Ui5(ctk.CTk):
         def __init__(self,app):
             super().__init__()
             self.geometry(f"300x820")
+            self.app=app
             self.attributes('-topmost', 'true')
             self.title(f"其餘設定")
             ctk.set_appearance_mode("System")
             ctk.set_default_color_theme("blue")
-            self.topattdict={}
             self.valuesdict={}
-            self.app=app
             self.valueslist=['怪物抗性','屬性加成','攻擊傷害%','暴擊%','暴傷%','共鳴技能加成%','共鳴解放加成%','普通攻擊傷害%','重擊傷害%']
+
             self.op()
 
 
         def op(self):
-            config = ConfigParser()
-            config.optionxform = str
-            config.read(f'{path}/calculate/exception.ini',encoding="utf-8")
+            config = rini(f'{path}/calculate/exception.ini')
 
             for i in self.valueslist:
                 label = ctk.CTkLabel(self, text=f'{i}',font=("Arial", 16))

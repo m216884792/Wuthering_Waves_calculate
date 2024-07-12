@@ -1,7 +1,7 @@
 import customtkinter as ctk
-from .groceries import skill_clear
-from configparser import ConfigParser
+from .groceries import skill_clear,rini
 import os
+
 
 path=os.getcwd()
 
@@ -14,7 +14,6 @@ class Ui7(ctk.CTk):
             ctk.set_appearance_mode("System")
             ctk.set_default_color_theme("blue")
             self.app=app
-            self.topattdict={}
             self.valuesdict={}
 
             self.valueslist=['招式傷害%','重擊招式傷害%','共鳴招式傷害%','共鳴解放招式傷害%']
@@ -23,9 +22,7 @@ class Ui7(ctk.CTk):
 
         def op(self):
 
-            config = ConfigParser()
-            config.optionxform = str
-            config.read(f'{path}/calculate/skill.ini',encoding="utf-8")
+            config=rini(f'{path}/calculate/skill.ini')
 
             for i in self.valueslist:
                 label = ctk.CTkLabel(self, text=f'{i}',font=("Arial", 16))

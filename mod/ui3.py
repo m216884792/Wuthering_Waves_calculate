@@ -1,6 +1,5 @@
 import customtkinter as ctk
-from .groceries import dev_clear
-from configparser import ConfigParser
+from .groceries import dev_clear,rini
 import os
 
 
@@ -22,9 +21,7 @@ class Ui3(ctk.CTk):
 
         def op(self,var,var2):
 
-            config = ConfigParser()
-            config.optionxform = str
-            config.read(f'{path}/calculate/dev{var2}.ini',encoding="utf-8")
+            config = rini(f'{path}/calculate/dev{var2}.ini')
 
             label = ctk.CTkLabel(self,text=var,font=("Arial", 16))
             label.pack()

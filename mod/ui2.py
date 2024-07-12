@@ -1,7 +1,7 @@
 import customtkinter as ctk
-from .groceries import arms_clear
-from configparser import ConfigParser
+from .groceries import arms_clear,rini
 import os
+
 
 path=os.getcwd()
 
@@ -19,9 +19,7 @@ class Ui2(ctk.CTk):
 
 
         def op(self):
-            config = ConfigParser()
-            config.optionxform = str
-            config.read(f'{path}/calculate/arms.ini',encoding="utf-8")
+            config = rini(f'{path}/calculate/arms.ini')
 
             self.topatt1,self.topatt2,self.topatt3,self.topatt4,self.topatt5=[None,None,None,None,None]
             topattlist=[self.topatt1,self.topatt2,self.topatt3,self.topatt4,self.topatt5]
@@ -44,9 +42,6 @@ class Ui2(ctk.CTk):
 
         def check_ok(self,config):
             arms_clear()
-            # config = ConfigParser()
-            # config.optionxform = str
-            # config.read(f'{path}/calculate/arms.ini',encoding="utf-8")
 
             for loc,i in enumerate(self.topattdict):
                 print(i.get(),'/',self.topattdict[i].get())

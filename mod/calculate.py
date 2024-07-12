@@ -126,7 +126,7 @@ def allcalculate():
     if devstatedict['暴擊%']>100:
         devstatedict['暴擊%']=100
 
-    returntxt2='\n'*10+f"等效傷害:{round(devstatedict['暴傷%']*devstatedict['暴擊%']/100+100*(1-devstatedict['暴擊%']/100), 5)}%\n\n"
+    returntxt2='\n'*8+f"等效傷害:{round(devstatedict['暴傷%']*devstatedict['暴擊%']/100+100*(1-devstatedict['暴擊%']/100), 5)}%\n\n"
     returntxt2+='暴擊\n'
 
     returntxt2+=eptxt('普通攻擊',nbaseatk,skillpercent,devstatedict["暴傷%"],int(exception['var']['怪物抗性']))

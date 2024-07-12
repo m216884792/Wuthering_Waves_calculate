@@ -1,7 +1,7 @@
 import customtkinter as ctk
-from .groceries import rank_clear
-from configparser import ConfigParser
+from .groceries import rank_clear,rini
 import os
+
 
 path=os.getcwd()
 
@@ -13,15 +13,13 @@ class Ui4(ctk.CTk):
             self.title(f"等級")
             ctk.set_appearance_mode("System")
             ctk.set_default_color_theme("blue")
-            self.topattdict={}
             self.app=app
+
             self.op()
 
 
         def op(self):
-            config = ConfigParser()
-            config.optionxform = str
-            config.read(f'{path}/calculate/rank.ini',encoding="utf-8")
+            config = rini(f'{path}/calculate/rank.ini')
 
             label = ctk.CTkLabel(self, text='人物等級',font=("Arial", 16))
             label.pack(pady=10)

@@ -2,6 +2,7 @@ import customtkinter as ctk
 from .groceries import rini
 import os
 
+
 path=os.getcwd()
 
 class Ui8(ctk.CTk):
@@ -13,10 +14,6 @@ class Ui8(ctk.CTk):
             ctk.set_appearance_mode("System")
             ctk.set_default_color_theme("blue")
 
-            self.topattdict={}
-            self.valuesdict={}
-
-            self.valueslist=['招式傷害%','重擊招式傷害%','共鳴招式傷害%','共鳴解放招式傷害%']
             self.op()
 
 

@@ -6,8 +6,8 @@ from mod.ui5 import Ui5
 from mod.ui6 import Ui6
 from mod.ui7 import Ui7
 from mod.ui8 import Ui8
-from mod.calculate import allcalculate
-from configparser import ConfigParser
+from mod.ui9 import Ui9
+from mod.calculate import allcalculate,rini
 import os
 
 
@@ -17,7 +17,7 @@ class Ui(ctk.CTk):
     """UI介面"""
     def __init__(self):
         super().__init__()
-        self.geometry("320x520")
+        self.geometry("320x575")
         self.title(f"www")
 
         ctk.set_appearance_mode("System")
@@ -30,9 +30,8 @@ class Ui(ctk.CTk):
         self.pack_items()
 
     def pack_items(self):
-        self.config = ConfigParser()
-        self.config.optionxform = str
-        self.config.read(f'{path}/calculate/base.ini',encoding="utf-8")
+
+        self.config=rini(f'{path}/calculate/base.ini')
 
 
         step1_label = ctk.CTkLabel(self, text="空裝白值", font=("Arial", 16))
@@ -86,8 +85,11 @@ class Ui(ctk.CTk):
         btn2 = ctk.CTkButton(self, text='詳細面板', command=self.show2,font=("Arial", 16))
         btn2.place(x=160-16*4,y=85+yadd*10)
 
+        btn3 = ctk.CTkButton(self, text='聲骸面板', command=self.devshow,font=("Arial", 16))
+        btn3.place(x=160-16*4,y=85+yadd*11)
+
         btn1 = ctk.CTkButton(self, text='顯示', command=self.show,font=("Arial", 16))
-        btn1.place(x=160-16*4,y=85+yadd*11)
+        btn1.place(x=160-16*4,y=85+yadd*12)
 
         label = ctk.CTkLabel(self, textvariable=self.allatk,font=("Arial", 16),justify=ctk.LEFT)
         label.place(x=320,y=20)
@@ -100,7 +102,7 @@ class Ui(ctk.CTk):
         self.mainloop()
 
     def show(self):
-        self.geometry("900x520")
+        self.geometry("675x575")
         self.config.set('var',f'ent1',f'{self.watk.get()}')
         self.config.set('var',f'ent2',f'{self.yatk.get()}')
 
@@ -138,6 +140,10 @@ class Ui(ctk.CTk):
         app2 = Ui8()
         app2.loop()
 
+    def devshow(self):
+        app2 = Ui9()
+        app2.loop()
+
 
 def main():
     app = Ui()
@@ -146,3 +152,6 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+#python -m nuitka --standalone --show-memory --windows-disable-console --show-progress --mingw64 --output-dir=E:/nuitkaoutput main.py --windows-uac-admin --plugin-enable=upx --upx-binary=D:\vscpy\bdo\output\upx\upx.exe --remove-output --follow-imports --plugin-enable=tk-inter
+

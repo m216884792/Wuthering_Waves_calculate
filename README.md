@@ -17,5 +17,6 @@
 ![image](https://github.com/m216884792/Wurthering_Wave_calculate/blob/main/img/8.png)  
 ## 查看詳細面板是否與遊戲數值一致
 ![image](https://github.com/m216884792/Wurthering_Wave_calculate/blob/main/img/6.png)  
+![image](https://github.com/m216884792/Wurthering_Wave_calculate/blob/main/img/10.png)  
 ## 右方顯示相關數值  
 ![image](https://github.com/m216884792/Wurthering_Wave_calculate/blob/main/img/9.png)  

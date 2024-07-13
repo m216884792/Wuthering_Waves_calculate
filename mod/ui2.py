@@ -26,7 +26,10 @@ class Ui2(ctk.CTk):
             topattlist=[self.topatt1,self.topatt2,self.topatt3,self.topatt4,self.topatt5]
 
             for loc,i in enumerate(topattlist):
-                i = ctk.CTkComboBox(self,font=("Arial", 16),values=['暴擊%','暴傷%','攻擊傷害%','重擊傷害%'])
+                # i = ctk.CTkComboBox(self,font=("Arial", 16),values=['暴擊%','暴傷%','攻擊傷害%','重擊傷害%',])
+                i = ctk.CTkComboBox(self,font=("Arial", 16),values=['暴擊%','暴傷%','攻擊傷害%','攻擊點傷',
+                                                                    '共鳴技能加成%','共鳴解放加成%','普通攻擊傷害%','重擊傷害%',
+                                                                    '生命','生命%','防禦','防禦%','共鳴效率'])
                 i.set(f"{config['var'][f'top{loc+1}']}")
                 i.pack(pady=5)
 

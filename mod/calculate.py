@@ -9,7 +9,7 @@ def allcalculate():
     devstatedict={'攻擊傷害%':0,'攻擊點傷':0,'暴擊%':5,'暴傷%':150,
     '共鳴技能加成%':0,'共鳴解放加成%':0,
     '重擊傷害%':0,'普通攻擊傷害%':0,
-    '生命':0,'生命%':0,'防禦':0,'防禦%':0,
+    '生命':0,'生命%':100,'防禦':0,'防禦%':100,
     '共鳴效率':0,'屬性加成':0}
     
     exception = rini(f'{path}/calculate/exception.ini') #額外
@@ -37,6 +37,12 @@ def allcalculate():
                 devstatedict['暴擊%']+=22
             elif '暴傷' in fixed:
                 devstatedict['暴傷%']+=44
+            elif '攻擊傷害' in fixed:
+                devstatedict['攻擊傷害%']+=33
+            elif '生命' in fixed:
+                devstatedict['生命%']+=33
+            elif '防禦' in fixed:
+                devstatedict['防禦%']+=41.8
 
         elif '3c' in fixed:
             devstatedict['攻擊點傷']+=100
@@ -44,9 +50,22 @@ def allcalculate():
                 devstatedict['屬性加成']+=30
             elif '攻擊傷害' in fixed:
                 devstatedict['攻擊傷害%']+=30
+            elif '生命' in fixed:
+                devstatedict['生命%']+=30
+            elif '防禦' in fixed:
+                devstatedict['防禦%']+=38
+            elif '共鳴效率' in fixed:
+                devstatedict['共鳴效率']+=32
 
         elif '1c' in fixed:
-            devstatedict['攻擊傷害%']+=18
+            devstatedict['生命']+=2280
+            if '攻擊傷害' in fixed:
+                devstatedict['攻擊傷害%']+=18
+            elif '生命' in fixed:
+                devstatedict['生命%']+=22.8
+            elif '防禦' in fixed:
+                devstatedict['防禦%']+=18
+            
 
 
         for i2 in range(1,6):
@@ -68,13 +87,19 @@ def allcalculate():
     returntxt=''
 
     level = rini(f'{path}/calculate/rank.ini')#等差減傷
+    base = rini(f'{path}/calculate/base.ini')#基礎
     returntxt+=f"人物等級:{int(level['var']['rank1'])}        怪物等級:{int(level['var']['rank2'])}\n\n"
+    returntxt+=f"生命:{int(int(base['var']['ent3'])*devstatedict['生命%']/100+devstatedict['生命'])}"
+    returntxt+=" "*9
+    returntxt+=f"防禦:{int(int(base['var']['ent4'])*devstatedict['防禦%']/100+devstatedict['防禦'])} \n\n"
+
+
     rdamage=(100+int(level['var']['rank1']))/(199+int(level['var']['rank1'])+int(level['var']['rank2']))#等差減傷
     returntxt+=f'等差減傷:{rdamage}\n\n'
 
     returntxt+=f"怪物抗性:{int(exception['var']['怪物抗性'])}%\n\n"
 
-    base = rini(f'{path}/calculate/base.ini')#基礎
+
     watk=int(base['var']['ent1'])#空裝白值
     yatk=int(base['var']['ent2'])#空裝黃值
     baseatk=watk*(1+devstatedict['攻擊傷害%']/100)+devstatedict['攻擊點傷']+yatk
@@ -91,7 +116,7 @@ def allcalculate():
 
     templist=['普通攻擊','重擊','e','r']
 
-    skillini = rini(f'{path}/calculate/skill.ini')
+    skillini = rini(f'{path}/calculate/skill.ini')#招式傷害%'
     skilldcit={'普通攻擊':float(skillini['var']['招式傷害%']),
                '重擊':float(skillini['var']['重擊招式傷害%']),
                'e':float(skillini['var']['共鳴招式傷害%']),
@@ -110,7 +135,7 @@ def allcalculate():
         returntxt+=etxt(i,var1,skilldcit[i],int(exception['var']['怪物抗性']))
 
 
-    returntxt2='\n'*(returntxt.count('\n')-9)
+    returntxt2='\n'*(returntxt.count('\n')-11)
     returntxt2+=f"等效傷害:{round(devstatedict['暴傷%']*devstatedict['暴擊%']/100+100*(1-devstatedict['暴擊%']/100), 5)}%\n\n"
     returntxt2+='暴擊\n'
 

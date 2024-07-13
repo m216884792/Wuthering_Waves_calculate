@@ -46,14 +46,13 @@ class Ui6(ctk.CTk):
             exception2_clear()
 
             for loc,i in enumerate(self.valuesdict):
-
                 config.set('var',f'{self.valueslist[loc]}',f'{self.valuesdict[self.valueslist[loc]].get()}')
 
             with open(f'{path}/calculate/exception2.ini', 'w',encoding="utf-8") as configfile:
                 config.write(configfile)
+
             self.app.show()
             self.destroy()
-
 
         def loop(self):
             self.mainloop()

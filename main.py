@@ -10,6 +10,7 @@ from mod.ui8 import Ui8 #詳細面板
 from mod.ui9 import Ui9 #聲骸面板
 from mod.calculate import allcalculate,rini
 import os
+import requests
 
 
 path=os.getcwd()
@@ -18,7 +19,7 @@ class Ui(ctk.CTk):
     """UI介面"""
     def __init__(self):
         super().__init__()
-        self.geometry("320x625")
+        self.geometry("675x625")
         self.title(f"www")
 
         ctk.set_appearance_mode("System")
@@ -30,6 +31,14 @@ class Ui(ctk.CTk):
         self.defense = ctk.StringVar()
         self.allatk = ctk.StringVar()
         self.allatk2 = ctk.StringVar()
+
+        try:
+            url='https://api.github.com/repos/m216884792/Wuthering_Waves_calculate/releases/latest'
+            text=requests.get(url=url,timeout=(1)).json()['body']
+            self.allatk.set(f'更新內容:\n\n{text}')
+        except:
+            pass
+
         self.pack_items()
 
     def pack_items(self):
@@ -110,19 +119,25 @@ class Ui(ctk.CTk):
         btn1 = ctk.CTkButton(self, text='顯示', command=self.show,font=("Arial", 16))
         btn1.place(x=x,y=y+yadd*12)
 
-        label = ctk.CTkLabel(self, textvariable=self.allatk,font=("Arial", 16),justify=ctk.LEFT)
+        label = ctk.CTkLabel(self,textvariable=self.allatk,font=("Arial", 16),justify=ctk.LEFT)
         label.place(x=320,y=20)
 
         label2 = ctk.CTkLabel(self, textvariable=self.allatk2,font=("Arial", 16),justify=ctk.LEFT)
         label2.place(x=500,y=56+36)
+
+
+        button_container = ctk.CTkFrame(self)
+        button_container.pack(side="bottom")
+
+        help_button = ctk.CTkLabel(button_container, text="v1.4.1-Beta", width=90)
+        help_button.grid(pady=10, padx=5, column=0, row=0)
+
 
     def loop(self,app):
         self.app=app
         self.mainloop()
 
     def show(self):
-        self.geometry("675x625")
-
         for i,i2 in enumerate([self.watk,self.yatk,self.hp,self.defense]):
             self.config.set('var',f'ent{i+1}',f'{i2.get()}')
 
@@ -172,4 +187,6 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+#python -m nuitka --standalone --show-memory --windows-disable-console --show-progress --mingw64 --output-dir=E:/nuitkaoutput main.py --windows-uac-admin --plugin-enable=upx --upx-binary=D:\vscpy\bdo\output\upx\upx.exe --remove-output --follow-imports --plugin-enable=tk-inter
 
